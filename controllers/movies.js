@@ -3,8 +3,6 @@ const NotFound = require('../errors/NotFound');
 const BadRequest = require('../errors/BadRequest');
 const Forbidden = require('../errors/Forbidden');
 
-require('dotenv').config();
-
 module.exports.getMovies = (req, res, next) => {
   movieSchema.find({ owner: req.user._id })
     .then((movies) => res.send(movies.reverse()))

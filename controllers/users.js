@@ -7,7 +7,7 @@ const Conflict = require('../errors/Conflict');
 
 require('dotenv').config();
 
-const { NODE_ENV, JWT_SECRET = 'fire' } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
