@@ -20,9 +20,9 @@ mongoose.connect(DB_URL).then(() => console.log('Connected to DB'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(rateLimit);
-// app.use(helmet());
-// app.use(cookieParser());
+app.use(rateLimit);
+app.use(helmet());
+app.use(cookieParser());
 
 app.use(cors({
   origin: [
