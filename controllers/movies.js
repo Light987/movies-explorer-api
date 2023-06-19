@@ -6,7 +6,7 @@ const Forbidden = require('../errors/Forbidden');
 require('dotenv').config();
 
 module.exports.getMovies = (req, res, next) => {
-  movieSchema.find({})
+  movieSchema.find({ owner: req.user._id })
     .then((movies) => res.send(movies.reverse()))
     .catch(next);
 };

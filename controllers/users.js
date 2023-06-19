@@ -26,6 +26,14 @@ module.exports.login = (req, res, next) => {
     });
 };
 
+module.exports.logout = (req, res, next) => res
+  .clearCookie('jwt')
+  .status(200)
+  .json({ message: 'Успешно вышел из системы' })
+  .catch((err) => {
+    next(err);
+  });
+
 module.exports.getUser = (req, res, next) => {
   userSchema.findById(req.user._id)
     .then((user) => {
@@ -73,10 +81,10 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { name, password } = req.body;
+  const { email, name } = req.body;
   userSchema.findByIdAndUpdate(
     req.user._id,
-    { name, password },
+    { email, name },
     { new: true, runValidators: true },
   )
     .then((user) => {
@@ -88,8 +96,8 @@ module.exports.updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'ValidationError') {
         next(new BadRequest('Переданы некорректные данные.'));
-      } else {
-        next(err);
       }
+      if (err.code === 11000) return next(new Conflict('Пользователь с таким email уже существует.'));
+      return next(err);
     });
 };
