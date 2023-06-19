@@ -26,10 +26,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'http://myplace.nomoredomains.rocks',
-    'https://myplace.nomoredomains.rocks',
-    'http://api.myplace.nomoredomains.rocks',
-    'https://api.myplace.nomoredomains.rocks',
+    'http://my-movies-explorer.nomoredomains.rocks',
+    'https://my-movies-explorer.nomoredomains.rocks',
+    'http://api.my-movies-explorer.nomoredomains.rocks',
+    'https://api.my-movies-explorer.nomoredomains.rocks',
   ],
   credentials: true,
 }));
